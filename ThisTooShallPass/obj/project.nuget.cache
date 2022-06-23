@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "jAKLKRGc5zRV7Rz7Mv0oYgYVz2y5VKS5SD1GAT5HjZj9EY0EScr3KMiZFUw9kaHyi3N7F3ksowfXOf7BGUmj2w==",
+  "success": true,
+  "projectFilePath": "/home/yariazen/projects/StardewValley/ThisTooShallPass/ThisTooShallPass.csproj",
+  "expectedPackageFiles": [
+    "/home/yariazen/.nuget/packages/pathoschild.stardew.modbuildconfig/4.0.1/pathoschild.stardew.modbuildconfig.4.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

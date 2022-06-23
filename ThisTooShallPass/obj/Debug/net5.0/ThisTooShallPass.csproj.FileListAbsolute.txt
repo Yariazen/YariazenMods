@@ -1,0 +1,10 @@
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.csproj.AssemblyReference.cache
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.GeneratedMSBuildEditorConfig.editorconfig
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.AssemblyInfoInputs.cache
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.AssemblyInfo.cs
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.csproj.CoreCompileInputs.cache
+/home/yariazen/projects/StardewValley/ThisTooShallPass/bin/Debug/net5.0/ThisTooShallPass.deps.json
+/home/yariazen/projects/StardewValley/ThisTooShallPass/bin/Debug/net5.0/ThisTooShallPass.dll
+/home/yariazen/projects/StardewValley/ThisTooShallPass/bin/Debug/net5.0/ThisTooShallPass.pdb
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.dll
+/home/yariazen/projects/StardewValley/ThisTooShallPass/obj/Debug/net5.0/ThisTooShallPass.pdb
