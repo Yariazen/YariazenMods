@@ -1,45 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using BuildableGreenhouse.Compatibility;
 using Microsoft.Xna.Framework.Graphics;
-using xTile;
-using HarmonyLib;
-using StardewValley;
-using StardewValley.Menus;
-using StardewValley.Locations;
-using StardewValley.Buildings;
+using SpaceShared.APIs;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using SpaceShared.APIs;
-using BuildableGreenhouse.Compatibility;
+using StardewValley;
+using StardewValley.Locations;
+using StardewValley.Menus;
+using System;
+using System.Collections.Generic;
+using xTile;
 
 namespace BuildableGreenhouse
 {
     public class ModEntry : Mod
     {
         private ModConfig Config;
-        private GraphicsDevice graphicsDevice;
 
         public override void Entry(IModHelper helper)
         {
             this.Config = helper.ReadConfig<ModConfig>();
-            this.graphicsDevice = Game1.graphics.GraphicsDevice;
 
             ModPatch.Initialize(helper, this.Monitor);
             ModCompatibility.Initialize(helper, this.Monitor, this.ModManifest);
 
             helper.Events.Content.AssetRequested += this.OnAssetRequested;
-            helper.Events.Player.Warped += this.OnWarped;
-            helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-            helper.Events.GameLoop.DayStarted += this.OnDayStarted;
-            helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
             helper.Events.Display.MenuChanged += this.OnMenuChanged;
-
-            var harmony = new Harmony(this.ModManifest.UniqueID);
-            harmony.Patch(
-               original: AccessTools.Method(typeof(GreenhouseBuilding), nameof(GreenhouseBuilding.drawInMenu)),
-               prefix: new HarmonyMethod(typeof(ModPatch), nameof(ModPatch.drawInMenu_Prefix))
-            );
+            helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
+            helper.Events.Player.Warped += this.OnWarped;
         }
 
         private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
@@ -56,27 +44,27 @@ namespace BuildableGreenhouse
                 });
             }
 
-            if(e.Name.IsEquivalentTo("Buildings\\BuildableGreenhouse"))
+            if (e.NameWithoutLocale.IsEquivalentTo("Buildings\\BuildableGreenhouse"))
             {
-                e.LoadFrom(() =>
-                {
-                    Texture2D greenhouseTexture = this.Helper.GameContent.Load<Texture2D>("Buildings\\Greenhouse");
-                    Rectangle newBounds = greenhouseTexture.Bounds;
-                    newBounds.Y += 160;
-                    newBounds.Width -= 128;
-                    newBounds.Height -= 160;
-
-                    Texture2D greenhouse = new Texture2D(graphicsDevice, newBounds.Width, newBounds.Height);
-                    Color[] data = new Color[newBounds.Width * newBounds.Height];
-                    greenhouseTexture.GetData(0, newBounds, data, 0, newBounds.Width * newBounds.Height);
-                    greenhouse.SetData(data);
-                    return greenhouse;
-                }, AssetLoadPriority.High);
+                e.LoadFrom(() => this.Helper.GameContent.Load<Texture2D>("Buildings\\Greenhouse"), AssetLoadPriority.High);
             }
 
-            if(e.Name.IsEquivalentTo("Maps\\BuildableGreenhouse"))
+            if (e.NameWithoutLocale.IsEquivalentTo("Maps\\BuildableGreenhouse"))
             {
                 e.LoadFrom(() => this.Helper.GameContent.Load<Map>("Maps\\Greenhouse"), AssetLoadPriority.High);
+            }
+        }
+
+        private void OnMenuChanged(object sender, MenuChangedEventArgs e)
+        {
+            if (e.NewMenu is CarpenterMenu menu)
+            {
+                if (this.Config.StartWithGreenhouse || Game1.getFarm().greenhouseUnlocked.Value)
+                {
+                    Monitor.Log("Adding Buildable Greenhouse to Carpenter Menu");
+                    var blueprints = this.Helper.Reflection.GetField<List<BluePrint>>(menu, "blueprints").GetValue();
+                    blueprints.Add(this.GetBlueprint());
+                }
             }
         }
 
@@ -92,13 +80,6 @@ namespace BuildableGreenhouse
 
             foreach (Type type in types)
                 spaceCore.RegisterSerializerType(type);
-
-            ModCompatibility.applyGMCMCompatibility(sender, e);
-        }
-
-        private void OnDayStarted(object sender, DayStartedEventArgs e)
-        {
-            ModCompatibility.applyGreenhouseUpgradesCompatibility();
         }
 
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
@@ -119,19 +100,6 @@ namespace BuildableGreenhouse
             }
         }
 
-        private void OnMenuChanged(object sender, MenuChangedEventArgs e)
-        {
-            if (e.NewMenu is CarpenterMenu menu)
-            {
-                if(this.Config.StartWithGreenhouse || Game1.getFarm().greenhouseUnlocked.Value)
-                {
-                    Monitor.Log("Adding Buildable Greenhouse to Carpenter Menu");
-                    var blueprints = this.Helper.Reflection.GetField<List<BluePrint>>(menu, "blueprints").GetValue();
-                    blueprints.Add(this.GetBlueprint());
-                }
-            }
-        }
-
         private void OnWarped(object sender, WarpedEventArgs e)
         {
             if (!e.IsLocalPlayer)
@@ -143,24 +111,16 @@ namespace BuildableGreenhouse
                 for (int i = 0; i < farm.buildings.Count; ++i)
                 {
                     var b = farm.buildings[i];
-                    if(b.buildingType.Value == "BuildableGreenhouse")
+                    if (b.buildingType.Value == "BuildableGreenhouse" && b is not BuildableGreenhouseBuilding)
                     {
-                        if(b is not BuildableGreenhouseBuilding)
-                        {
-                            farm.buildings[i] = new BuildableGreenhouseBuilding();
-                            farm.buildings[i].buildingType.Value = b.buildingType.Value;
-                            farm.buildings[i].daysOfConstructionLeft.Value = b.daysOfConstructionLeft.Value;
-                            farm.buildings[i].tileX.Value = b.tileX.Value;
-                            farm.buildings[i].tileY.Value = b.tileY.Value;
-                            farm.buildings[i].tilesWide.Value = b.tilesWide.Value;
-                            farm.buildings[i].tilesHigh.Value = b.tilesHigh.Value;
-                            farm.buildings[i].load();
-                        }
-                        else
-                        {
-                            if (!ModCompatibility.Greenhouses.ContainsKey(b.indoors.Value.uniqueName.Value))
-                                ModCompatibility.Greenhouses.Add(b.indoors.Value.uniqueName.Value, b);
-                        }
+                        farm.buildings[i] = new BuildableGreenhouseBuilding();
+                        farm.buildings[i].buildingType.Value = b.buildingType.Value;
+                        farm.buildings[i].daysOfConstructionLeft.Value = b.daysOfConstructionLeft.Value;
+                        farm.buildings[i].tileX.Value = b.tileX.Value;
+                        farm.buildings[i].tileY.Value = b.tileY.Value;
+                        farm.buildings[i].tilesWide.Value = b.tilesWide.Value;
+                        farm.buildings[i].tilesHigh.Value = b.tilesHigh.Value;
+                        farm.buildings[i].load();
                     }
                 }
             }
@@ -171,7 +131,7 @@ namespace BuildableGreenhouse
             return new BluePrint("BuildableGreenhouse");
         }
 
-        private String BuildMaterialsToString()
+        private string BuildMaterialsToString()
         {
             string result = "";
             foreach (KeyValuePair<int, int> kvp in this.Config.BuildMaterals)

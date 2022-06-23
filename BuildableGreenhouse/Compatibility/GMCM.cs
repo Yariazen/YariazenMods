@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
-using StardewModdingAPI.Events;
 using StardewValley;
 using System;
 
@@ -9,11 +7,11 @@ namespace BuildableGreenhouse.Compatibility
 {
     partial class ModCompatibility
     {
-        public static void applyGMCMCompatibility(object sender, GameLaunchedEventArgs e)
+        public static void applyGMCMCompatibility()
         {
             if (Helper.ModRegistry.IsLoaded("spacechase0.GenericModConfigMenu"))
             {
-                Monitor.Log("Applying GMCM Compatibility");
+                Monitor.Log($"{Manifest.UniqueID} applying GMCM compatibility");
                 gmcmCompatibility();
             }
         }
@@ -34,11 +32,6 @@ namespace BuildableGreenhouse.Compatibility
                 titleScreenOnly: true
             );
 
-            configMenu.AddParagraph(
-                mod: Manifest,
-                text: () => "This is a very rudimentary config menu. To change the build materials itselves rather than just the amount, the only way is to edit the config.json file. This may change in the future."
-            );
-
             configMenu.AddBoolOption(
                 mod: Manifest,
                 getValue: () => Config.StartWithGreenhouse,
@@ -57,38 +50,14 @@ namespace BuildableGreenhouse.Compatibility
 
             configMenu.AddSectionTitle(
                 mod: Manifest,
-                text: () => "Build Materials",
-                tooltip: () => "These are the materials and amounts needed to build a greenhouse"
+                text: () => "Building Materials"
             );
 
-            var buildMaterials = Config.BuildMaterals;
-
-            foreach (var buildMaterial in buildMaterials)
-            {
-                int objectIndex = buildMaterial.Key;
-
-                configMenu.AddImage(
-                    mod: Manifest,
-                    texture: () => springObjects,
-                    texturePixelArea: Game1.getSourceRectForStandardTileSheet(springObjects, objectIndex, 16, 16),
-                    scale: 4
-                );
-
-                configMenu.AddNumberOption(
-                    mod: Manifest,
-                    getValue: () => objectIndex,
-                    setValue: value => { },
-                    name: () => "Material Id"
-                );
-
-                configMenu.AddNumberOption(
-                    mod: Manifest,
-                    getValue: () => buildMaterials[objectIndex],
-                    setValue: value => buildMaterials[objectIndex] = value,
-                    name: () => "Material Count"
-                );
-            }
-        }   
+            configMenu.AddParagraph(
+                mod: Manifest,
+                text: () => "Building materials can only be modified through config.json found in this mod's folder."
+            );
+        }
     }
 
     public interface IGenericModConfigMenuApi
@@ -96,9 +65,7 @@ namespace BuildableGreenhouse.Compatibility
         void Register(IManifest mod, Action reset, Action save, bool titleScreenOnly = false);
         void AddSectionTitle(IManifest mod, Func<string> text, Func<string> tooltip = null);
         void AddParagraph(IManifest mod, Func<string> text);
-        void AddImage(IManifest mod, Func<Texture2D> texture, Rectangle? texturePixelArea = null, int scale = Game1.pixelZoom);
         void AddBoolOption(IManifest mod, Func<bool> getValue, Action<bool> setValue, Func<string> name, Func<string> tooltip = null, string fieldId = null);
         void AddNumberOption(IManifest mod, Func<int> getValue, Action<int> setValue, Func<string> name, Func<string> tooltip = null, int? min = null, int? max = null, int? interval = null, Func<int, string> formatValue = null, string fieldId = null);
-        void OnFieldChanged(IManifest mod, Action<string, object> onChange);
     }
 }

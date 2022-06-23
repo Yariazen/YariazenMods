@@ -12,7 +12,7 @@ namespace BuildableGreenhouse.Compatibility
         {
             if (Helper.ModRegistry.IsLoaded("Cecidelus.GreenhouseUpgrades"))
             {
-                Monitor.Log("Applying GreenhouseUpgrades Compatibility");
+                Monitor.Log($"{Manifest.UniqueID} applying GreenhouseUpgrades compatibility");
 
                 GreenhouseBuilding greenhouse = Game1.getFarm().buildings.OfType<GreenhouseBuilding>().FirstOrDefault();
 
