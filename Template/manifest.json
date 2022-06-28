@@ -1,0 +1,9 @@
+{
+    "Name": "Template",
+    "Author": "Yariazen",
+    "Version": "v0.0.0",
+    "Description": "Mod Template",
+    "UniqueID": "Yariazen.Template",
+    "EntryDll": "Template.dll",
+    "MinimumApiVersion": "3.1.4"
+}
