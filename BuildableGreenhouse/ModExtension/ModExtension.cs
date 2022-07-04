@@ -13,8 +13,6 @@ namespace BuildableGreenhouse.ModExtension
         private static partial void SolidFoundationsExtension();
         private static partial void GenericModConfigMenuExtention();
 
-        private static partial void GreenhouseCompatibility();
-
         public static void Initialize(IModHelper helper, IMonitor monitor, IManifest manifest)
         {
             Monitor = monitor;
@@ -26,8 +24,6 @@ namespace BuildableGreenhouse.ModExtension
 
             SolidFoundationsExtension();
             GenericModConfigMenuExtention();
-
-            GreenhouseCompatibility();
         }
 
         private static void initializeAPIs(object sender, GameLaunchedEventArgs e)
