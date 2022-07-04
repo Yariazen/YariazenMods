@@ -12,7 +12,6 @@ namespace BuildableGreenhouse.ModExtension
 
         private static partial void SolidFoundationsExtension();
         private static partial void GenericModConfigMenuExtention();
-        private static partial void BCBuildingsExtension();
 
         private static partial void GreenhouseCompatibility();
 
@@ -27,7 +26,6 @@ namespace BuildableGreenhouse.ModExtension
 
             SolidFoundationsExtension();
             GenericModConfigMenuExtention();
-            BCBuildingsExtension();
 
             GreenhouseCompatibility();
         }
@@ -44,11 +42,6 @@ namespace BuildableGreenhouse.ModExtension
             {
                 Monitor.Log($"{Manifest.UniqueID} hooking into GMCM Api", LogLevel.Trace);
                 GenericModConfigMenuApi = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-            }
-            if (Helper.ModRegistry.IsLoaded("leclair.bcbuildings"))
-            {
-                Monitor.Log($"{Manifest.UniqueID} hooking into BCBuildings Api", LogLevel.Trace);
-                BCBuildingsApi = Helper.ModRegistry.GetApi<IBCBuildingsApi>("leclair.bcbuildings");
             }
         }
     }

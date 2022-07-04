@@ -2,7 +2,6 @@
 using SolidFoundations.Framework.Models.ContentPack;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using System;
 using System.Collections.Generic;
 
 namespace BuildableGreenhouse.ModExtension
@@ -29,6 +28,7 @@ namespace BuildableGreenhouse.ModExtension
             GreenhouseBuilding.BuildMaterials = getBuildingMaterial(Config.BuildingDifficulty);
             applyTranslations(sender, e);
         }
+
         private static void applyTranslations(object sender, object e)
         {
             var blueprintDict = Helper.GameContent.Load<Dictionary<string, string>>("Data\\Blueprints");
@@ -103,10 +103,12 @@ namespace BuildableGreenhouse.ModExtension
         private static string BuildingMaterialsToString(List<BuildingMaterial> buildingMaterials)
         {
             string result = "";
-            foreach (BuildingMaterial material in buildingMaterials)
-            {
-                result += $"{material.ItemID}: {material.Amount}, ";
-            }
+            if (buildingMaterials != null)
+                foreach (BuildingMaterial material in buildingMaterials)
+                    result += $"{material.ItemID}: {material.Amount}, ";
+            else
+                result += "None";
+            
             return result;
         }
     }
