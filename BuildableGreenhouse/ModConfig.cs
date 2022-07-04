@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Object = StardewValley.Object;
-
-namespace BuildableGreenhouse
+﻿namespace BuildableGreenhouse
 {
     public class ModConfig
     {
-        public string _StartWithGreenhouse { get; set; } = "True to start with the buildable greenhouse; False to unlock the buildable greenhouse when you unlock the greenhouse";
+        public string _StartWithGreenhouse { get; set; } = I18n.BuildableGreenhouse_StartWithGreenhouse_Tooltip();
         public bool StartWithGreenhouse { set; get; } = false;
 
-        public string _BuildPriceDescription { get; set; } = "This is the price to build a greenhouse";
-        public int BuildPrice { get; set; } = 100000;
-        
-        public string _BuildMaterialsDescription { get; set; } = "These are the materials and amounts needed to build a greenhouse";
-        public Dictionary<int, int> BuildMaterals { get; set; } = new()
-        {
-            [Object.stone] = 500,
-            [709 /* Hardwood */] = 100,
-            [Object.iridiumBar] = 5
-        };
+        public string _BuildCostDescription { get; set; } = I18n.BuildableGreenhouse_BuildCost_Tooltip();
+        public int BuildCost { get; set; } = 100000;
+
+        public string _BuildDaysDescription { get; set; } = I18n.BuildableGreenhouse_BuildDays_Tooltip();
+        public int BuildDays { get; set; } = 3;
+
+        public string _BuildingDifficulty { get; set; } = I18n.BuildableGreenhouse_BuildingDifficulty_Tooltip();
+        public int BuildingDifficulty { get; set; } = 2;
     }
 }

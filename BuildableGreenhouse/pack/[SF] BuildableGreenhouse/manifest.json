@@ -1,0 +1,11 @@
+{
+    "Name": "[SF] Buildable Greenhouse Updated",
+    "Author": "Yariazen",
+    "Version": "1.0.0",
+    "Description": "Makes the Greenhouse buildable after unlocking it",
+    "UniqueID": "Yariazen.SFBuildableGreenhouse",
+    "ContentPackFor": {
+        "UniqueID": "PeacefulEnd.SolidFoundations",
+        "MinimumVersion": "1.11.3"
+    }
+}
