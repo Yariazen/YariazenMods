@@ -1,6 +1,6 @@
 ﻿{
     "BuildableGreenhouse.StartWithGreenhouse.Name": "Start With Greenhouse",
-    "BuildableGreenhouse.StartWithGreenhouse.Tooltip": "True: Greenhouse is buildable from start\nFalse: The greenhouse is buildable once it is unlocked",
+    "BuildableGreenhouse.StartWithGreenhouse.Tooltip": "true: Greenhouse is buildable from start\nfalse: The greenhouse is buildable once it is unlocked",
 
     "BuildableGreenhouse.BuildCost.Name": "Build Cost",
     "BuildableGreenhouse.BuildCost.Tooltip": "This is the cost to construct a greenhouse",

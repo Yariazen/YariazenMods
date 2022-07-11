@@ -2,7 +2,9 @@
 using SolidFoundations.Framework.Models.ContentPack;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BuildableGreenhouse.ModExtension
 {
@@ -23,8 +25,17 @@ namespace BuildableGreenhouse.ModExtension
                 GreenhouseBuilding.BuildCondition = null;
             else
                 GreenhouseBuilding.BuildCondition = "PLAYER_HAS_FLAG Any ccPantry";
-            GreenhouseBuilding.BuildCost = Config.BuildCost;
-            GreenhouseBuilding.BuildDays = Config.BuildDays;
+            
+            if (Config.BuildCost < 0)
+                GreenhouseBuilding.BuildCost = 0;
+            else
+                GreenhouseBuilding.BuildCost = Config.BuildCost;
+
+            if (Config.BuildDays < 0)
+                GreenhouseBuilding.BuildDays = 0;
+            else
+                GreenhouseBuilding.BuildDays = Config.BuildDays;
+
             GreenhouseBuilding.BuildMaterials = getBuildingMaterial(Config.BuildingDifficulty);
             applyTranslations(sender, e);
         }

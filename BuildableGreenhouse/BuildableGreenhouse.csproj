@@ -22,6 +22,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="pack\[SF] BuildableGreenhouse\Interiors\" />
+  </ItemGroup>
+
 	<Target Name="DeployPack" AfterTargets="Build">
 		<Message Text="Running DeployPack target..." />
 		<ItemGroup>

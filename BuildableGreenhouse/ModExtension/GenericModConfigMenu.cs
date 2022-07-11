@@ -38,7 +38,7 @@ namespace BuildableGreenhouse.ModExtension
             GenericModConfigMenuApi.AddNumberOption(
                 mod: Manifest,
                 getValue: () => Config.BuildCost,
-                setValue: value => Config.BuildCost = value,
+                setValue: value => Config.BuildCost = setNumberOption(value),
                 name: I18n.BuildableGreenhouse_BuildCost_Name,
                 tooltip: I18n.BuildableGreenhouse_BuildCost_Tooltip,
                 fieldId: "BuildableGreenhouse.BuildCost"
@@ -47,7 +47,7 @@ namespace BuildableGreenhouse.ModExtension
             GenericModConfigMenuApi.AddNumberOption(
                 mod: Manifest,
                 getValue: () => Config.BuildDays,
-                setValue: value => Config.BuildDays = value,
+                setValue: value => Config.BuildDays = setNumberOption(value),
                 name: I18n.BuildableGreenhouse_BuildDays_Name,
                 tooltip: I18n.BuildableGreenhouse_BuildDays_Tooltip,
                 fieldId: "BuildableGreenhouse.BuildDays"
@@ -103,8 +103,14 @@ namespace BuildableGreenhouse.ModExtension
                 return 0;
             else if (value > 2)
                 return 2;
-            else
-                return value;
+            return value;
+        }
+
+        private static int setNumberOption(int value)
+        {
+            if (value < 0)
+                return 0;
+            return value;
         }
     }
 
