@@ -11,9 +11,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
-		<EmbeddedResource Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
-		<None Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
+		<Compile Remove="pack\[SF] BuildableGreenhouse\Buildings\NewFolder\**" />
+		<EmbeddedResource Remove="pack\[SF] BuildableGreenhouse\Buildings\NewFolder\**" />
+		<None Remove="pack\[SF] BuildableGreenhouse\Buildings\NewFolder\**" />
 	</ItemGroup>
 
 	<ItemGroup>
