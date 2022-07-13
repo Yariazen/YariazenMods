@@ -1,9 +1,10 @@
 ﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using static BuildableGreenhouse.Migrations.ModMigrations;
 
 namespace BuildableGreenhouse.ModExtension
 {
-    public partial class ModExtension
+    public static partial class ModExtension
     {
         private static IMonitor Monitor;
         private static IModHelper Helper;
@@ -13,7 +14,7 @@ namespace BuildableGreenhouse.ModExtension
         private static partial void SolidFoundationsExtension();
         private static partial void GenericModConfigMenuExtention();
 
-        public static void Initialize(IModHelper helper, IMonitor monitor, IManifest manifest)
+        public static void InitializeExtensions(IModHelper helper, IMonitor monitor, IManifest manifest)
         {
             Monitor = monitor;
             Helper = helper;
@@ -39,6 +40,8 @@ namespace BuildableGreenhouse.ModExtension
                 Monitor.Log($"{Manifest.UniqueID} hooking into GMCM Api", LogLevel.Trace);
                 GenericModConfigMenuApi = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             }
+            InitializeMigrations(Helper, Monitor, Manifest);
+            ApplyMigration1(SolidFoundationsApi);
         }
     }
 }

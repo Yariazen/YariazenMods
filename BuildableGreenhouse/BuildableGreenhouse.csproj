@@ -1,30 +1,41 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <AssemblyName>$(ProjectName)</AssemblyName>
-	  <RootNamespace>BuildableGreenhouse</RootNamespace>
-	  <DefaultNamespace>BuildableGreenhouse</DefaultNamespace>
-	  <Version>1.0.0</Version>
-	  <TargetFramework>net5.0</TargetFramework>
-	  <GameModsPath>D:\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\BuildableGreenhouse</GameModsPath>
-	  <_PackOutputLocation>$(GameModsPath)/</_PackOutputLocation>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyName>$(ProjectName)</AssemblyName>
+		<RootNamespace>BuildableGreenhouse</RootNamespace>
+		<DefaultNamespace>BuildableGreenhouse</DefaultNamespace>
+		<Version>1.1.0</Version>
+		<TargetFramework>net5.0</TargetFramework>
+		<GameModsPath>D:\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\BuildableGreenhouse</GameModsPath>
+		<_PackOutputLocation>$(GameModsPath)/</_PackOutputLocation>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.1" />
-    <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
+		<EmbeddedResource Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
+		<None Remove="pack\[SF] BuildableGreenhouse\Interiors\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="SolidFoundations">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\SolidFoundations\SolidFoundations.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.1" />
+		<PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="pack\[SF] BuildableGreenhouse\Interiors\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="i18n\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\smapi-internal\Newtonsoft.Json.dll</HintPath>
+			<Aliases></Aliases>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="SolidFoundations">
+			<HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\SolidFoundations\SolidFoundations.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
 
 	<Target Name="DeployPack" AfterTargets="Build">
 		<Message Text="Running DeployPack target..." />

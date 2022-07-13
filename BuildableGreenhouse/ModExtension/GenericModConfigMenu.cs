@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BuildableGreenhouse.ModExtension
 {
-    public partial class ModExtension
+    public static partial class ModExtension
     {
         private static IGenericModConfigMenuApi GenericModConfigMenuApi;
 

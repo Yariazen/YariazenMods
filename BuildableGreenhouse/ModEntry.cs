@@ -11,7 +11,7 @@ namespace BuildableGreenhouse
         {
             I18n.Init(helper.Translation);
 
-            Initialize(helper, Monitor, ModManifest);
+            InitializeExtensions(helper, Monitor, ModManifest);
 
             helper.Events.Content.AssetRequested += this.OnAssetRequested;
         }
@@ -25,6 +25,11 @@ namespace BuildableGreenhouse
                     greenhouseIndoorMap.Properties["IsGreenhouse"] = true;
                 });
             }
+        }
+
+        private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
+        {
+            
         }
     }
 }

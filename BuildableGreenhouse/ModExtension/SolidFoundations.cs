@@ -8,7 +8,7 @@ using System.IO;
 
 namespace BuildableGreenhouse.ModExtension
 {
-    public partial class ModExtension
+    public static partial class ModExtension
     {
         private static ISolidFoundationsApi SolidFoundationsApi;
 
