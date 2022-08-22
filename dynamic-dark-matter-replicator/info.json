@@ -1,0 +1,11 @@
+{
+    "name": "dynamic-dark-matter-replicator",
+    "version": "0.0.1",
+    "factorio_version": "1.1",
+    "title": "Dynamic Dark Matter Replicator",
+    "author": "Yariazen",
+    "description": "Variation of the Dark Matter Replicator mod to dynamically generate Dark Matter Replicator Recipes",
+    "dependencies": [
+        "base >= 1.0.0"
+    ]
+}
