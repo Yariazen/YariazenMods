@@ -2,6 +2,7 @@ best_machine = {}
 
 function rawingredients(recipe, exclude) -- call this function
 	for name, assem in pairs(data.raw["assembling-machine"]) do
+		log(name)
 		if assem.crafting_categories and assem.energy_usage then
 			for cat, _ in pairs(assem.crafting_categories) do
 				if not best_machine[cat] then
@@ -13,13 +14,11 @@ function rawingredients(recipe, exclude) -- call this function
 			end
 		end
 	end
-	log(recipe.name)
-	log(recipe.category)
 	log(serpent.block(best_machine))
-	ret = getRawIngredients(recipe, exclude)
-	ret.time = (ret.time or 0) + (recipe.energy or 1) / best_machine[recipe.category].speed
-	ret.energy = (ret.energy or 0) +
-		(recipe.energy or 1) / best_machine[recipe.category].speed * best_machine[recipe.category].energy
+	--ret = getRawIngredients(recipe, exclude)
+	--ret.time = (ret.time or 0) + (recipe.energy or 1) / best_machine[recipe.category].speed
+	--ret.energy = (ret.energy or 0) +
+		--(recipe.energy or 1) / best_machine[recipe.category].speed * best_machine[recipe.category].energy
 	return ret
 end
 
@@ -56,11 +55,11 @@ function getIngredients(recipe)
 	end
 	return ingredients
 end
-
+--[[
 function getProducts(recipe)
 	local products = {}
-	if (recipe.products) then
-		for i, product in pairs(recipe.products) do
+	if (recipe.results) then
+		for i, product in pairs(recipe.results) do
 			if (product.name and product.amount) then
 				products[product.name] = product.amount
 			elseif product.amount_min and product.amount_max then
@@ -187,3 +186,4 @@ function getRawIngredients(recipe, excluded)
 
 	return raw_ingredients
 end
+--]]
