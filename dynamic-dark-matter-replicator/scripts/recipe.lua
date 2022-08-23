@@ -2,9 +2,8 @@ best_machine = {}
 
 function rawingredients(recipe, exclude) -- call this function
 	for name, assem in pairs(data.raw["assembling-machine"]) do
-		log(name)
 		if assem.crafting_categories and assem.energy_usage then
-			for cat, _ in pairs(assem.crafting_categories) do
+			for _, cat in pairs(assem.crafting_categories) do
 				if not best_machine[cat] then
 					best_machine[cat] = { speed = assem.crafting_speed or 1, energy = getEnergy(assem.energy_usage), name = name }
 				elseif (assem.crafting_speed or 1) / (getEnergy(assem.energy_usage) or 1) >
