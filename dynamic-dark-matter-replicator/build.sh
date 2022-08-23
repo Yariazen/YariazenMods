@@ -12,9 +12,9 @@ INFO_JSON=info.json
 JQ_ARGN=.name
 JQ_RESPONSEN=$(cat $INFO_JSON | jq -r "$JQ_ARGN")
 JQ_ARGV=.version
-JQ_RESPONSEB=$(cat $INFO_JSON | jq -r "$JQ_ARGV")
+JQ_RESPONSEV=$(cat $INFO_JSON | jq -r "$JQ_ARGV")
 
-MOD_NAME=JQ_RESPONSEN
+MOD_NAME=$JQ_RESPONSEN
 ZIP_NAME="$MOD_NAME""_""$JQ_RESPONSEV"".zip"
 
 python=`cat <<HEREDOC
@@ -29,6 +29,7 @@ def zipDir(path, ziph):
 
 with zipfile.ZipFile('$ZIP_NAME', 'w', zipfile.ZIP_DEFLATED) as ziph:
     zipDir('.', ziph)
+    print("Done:\t{}".format('$ZIP_NAME'))
 HEREDOC
 `
 
