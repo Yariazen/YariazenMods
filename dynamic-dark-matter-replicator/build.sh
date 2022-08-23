@@ -1,12 +1,21 @@
 #!/bin/bash
-FACTIORIO_PATH=/mnt/c/Users/Aidan/AppData/Roaming/Factorio/mods/
-MOD_NAME=dynamic-dark-matter-replicator
+
+if uname -r | grep -q "microsoft" 
+then
+    FACTIORIO_PATH=/mnt/c/Users/Aidan/AppData/Roaming/Factorio/mods/
+else
+    FACTIORIO_PATH=~/.factorio/mods
+fi
 
 INFO_JSON=info.json
-JQ_ARGS=.version
-JQ_RESPONSE=$(cat $INFO_JSON | jq -r "$JQ_ARGS")
 
-ZIP_NAME="$MOD_NAME""_""$JQ_RESPONSE"".zip"
+JQ_ARGN=.name
+JQ_RESPONSEN=$(cat $INFO_JSON | jq -r "$JQ_ARGN")
+JQ_ARGV=.version
+JQ_RESPONSEB=$(cat $INFO_JSON | jq -r "$JQ_ARGV")
+
+MOD_NAME=JQ_RESPONSEN
+ZIP_NAME="$MOD_NAME""_""$JQ_RESPONSEV"".zip"
 
 python=`cat <<HEREDOC
 import zipfile, os
