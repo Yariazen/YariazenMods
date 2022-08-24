@@ -2,7 +2,7 @@
 
 if uname -r | grep -q "microsoft" 
 then
-    FACTIORIO_PATH=/mnt/c/Users/Aidan/AppData/Roaming/Factorio/mods/
+    FACTIORIO_PATH=$APPDATA"/Factorio/mods/"
 else
     FACTIORIO_PATH=~/.factorio/mods
 fi
