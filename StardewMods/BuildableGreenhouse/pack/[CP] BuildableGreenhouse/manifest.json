@@ -1,0 +1,11 @@
+﻿{
+    "Name": "[CP] Buildable Greenhouse Updated",
+    "Author": "Yariazen",
+    "Version": "1.0.0",
+    "Description": "CP Content Pack for Yariazen.BuildableGreenhouse",
+    "UniqueID": "Yariazen.CPBuildableGreenhouse",
+    "UpdateKeys": [ "Nexus:???" ],
+    "ContentPackFor": {
+        "UniqueID": "Pathoschild.ContentPatcher"
+    }
+}

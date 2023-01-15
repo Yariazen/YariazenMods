@@ -1,0 +1,10 @@
+{
+    "Name": "Seasonal Seeds",
+    "Author": "Yariazen",
+    "Version": "0.0.1-beta",
+    "Description": "Description",
+    "UniqueID": "Yariazen.SeasonalSeeds",
+    "EntryDll": "SeasonalSeeds.dll",
+    "MinimumApiVersion": "3.1.4",
+    "UpdateKeys": []
+}

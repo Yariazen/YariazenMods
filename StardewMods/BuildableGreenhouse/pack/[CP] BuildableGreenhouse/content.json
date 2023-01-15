@@ -1,0 +1,10 @@
+﻿{
+    "Format": "1.28.1",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "Maps/GreenhouseMap",
+            "FromFile": "assets/GreenhouseMap.tmx"
+        }
+    ]
+}

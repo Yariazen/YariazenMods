@@ -1,0 +1,12 @@
+{
+    "Name": "[SF] Buildable Greenhouse Updated",
+    "Author": "Yariazen",
+    "Version": "1.1.0",
+    "Description": "SF Content Pack for Yariazen.BuildableGreenhouse",
+    "UniqueID": "Yariazen.SFBuildableGreenhouse",
+    "UpdateKeys": [ "Nexus:???" ],
+    "ContentPackFor": {
+        "UniqueID": "PeacefulEnd.SolidFoundations",
+        "MinimumVersion": "1.12.2"
+    }
+}
