@@ -1,3 +1,6 @@
 [submodule "FactorioMods/space-factorissimo-updated"]
 	path = FactorioMods/space-factorissimo-updated
 	url = https://github.com/Yariazen/space-factorissimo-updated
+[submodule "PlateUpMods/KitchenLib"]
+	path = PlateUpMods/KitchenLib
+	url = https://github.com/Yariazen/KitchenLib
