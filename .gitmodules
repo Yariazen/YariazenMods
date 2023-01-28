@@ -4,3 +4,6 @@
 [submodule "PlateUpMods/KitchenLib"]
 	path = PlateUpMods/KitchenLib
 	url = https://github.com/Yariazen/KitchenLib
+[submodule "PlateUpMods/Yaraizen.PlateUp.ModBuildUtilities"]
+	path = PlateUpMods/Yaraizen.PlateUp.ModBuildUtilities
+	url = https://github.com/Yariazen/Yaraizen.PlateUp.ModBuildUtilities
