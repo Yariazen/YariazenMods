@@ -2,6 +2,7 @@
 using KitchenLib;
 using KitchenLib.Customs;
 using KitchenLib.References;
+using KitchenLib.src.ContentPack;
 using KitchenLib.Utils;
 using System.Collections.Generic;
 using System.Reflection;
@@ -20,13 +21,12 @@ namespace Testing
         internal static Item Tomato => GetExistingGDO<Item>(ItemReferences.Tomato);
         internal static Item Plate => GetExistingGDO<Item>(ItemReferences.Plate);
 
-        internal static Item Honey => GetModdedGDO<Item, Honey>();
-
         public Main() : base(MOD_ID, MOD_NAME, MOD_AUTHOR, MOD_VERSION, $"{PLATEUP_VERSION}", Assembly.GetExecutingAssembly()) { }
 
         protected override void Initialise()
         {
             AddGameDataObject<TestItemGroup>();
+            ContentPackManager manager;
         }
 
         private static T1 GetModdedGDO<T1, T2>() where T1 : GameDataObject
